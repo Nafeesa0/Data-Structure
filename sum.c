@@ -2,17 +2,19 @@
 
 int main()
 {
-	int arr[10],sum=0,n,i,j;
-	printf("Enter the elements : ");
-	scanf("%d",&n);
-	for(i=0;i<=n-1;i++)
-	{
-		scanf("%d",&arr[i]);
-	}
-	for(j=0;j<=n-1;j++)
-	{
-		sum=sum+arr[j];
-	}
-	printf("sum = %d",sum);
-	return 0;
+    int n, sum = 0, i, array[100];
+
+    printf("Enter the limit: ");
+    scanf("%d", &n);
+
+    printf("\nEnter %d integers \n", n);
+
+    for(i = 0; i < n; i++)
+    {
+        scanf("%d", &array[c]);
+        sum += array[i];    // same as sum = sum + array[i]
+    }
+
+    printf("\nSum = %d\n", sum);
+    return 0;
 }
