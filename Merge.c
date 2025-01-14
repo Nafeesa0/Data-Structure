@@ -1,104 +1,101 @@
 #include <stdio.h>
-#include <stdlib.h>
 
-void sort(int arr[],int size)
-{
-	int temp;
-	for(int i = 0; i < size; i++)
-	{
-		for(int j = i+1; j < size; j++)
-		{
-			if(arr[i]>arr[j])
-			{
-				temp = arr[i];
-				arr[i] = arr[j];
-				arr[j] = temp;
-			}
-		}
-	}
+// Function to sort an array using bubble sort
+void sortArray(int arr[], int size) {
+    int i, j;
+    for (i = 0; i < size - 1; i++) {
+        for (j = 0; j < size - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
 }
 
-void merge(int arr1[],int arr2[], int size1,int size2,int *merged)
-{
-	int size;
-	for(int i=0;i<size1+1;i++)
-	{
-		merged[i] = arr1[i];
-		size=i;
-	}
-	for(int j=0;j<size2+1;j++)
-	{
-		merged[size+j] = arr2[j];
-	}	
+// Function to merge two arrays into a third array
+void mergeArrays(int arr1[], int size1, int arr2[], int size2, int arr3[]) {
+    int i;
+    for (i = 0; i < size1; i++) {
+        arr3[i] = arr1[i];
+    }
+    for (i = 0; i < size2; i++) {
+        arr3[size1 + i] = arr2[i];
+    }
 }
 
-int main()
-{
-//Array 1
-	int arr1[4] = {34,6,3,17};
-	int size1 = sizeof(arr1)/sizeof(arr1[0]);
+int main() {
+    int i, n, k;
 
-	printf("Unsored Array 1:\n");
-	for(int i=0;i<size1;i++)
-	{
-		printf("%d,",arr1[i]);	
-	}
-	printf("\n");
+    // Input for the first array
+    printf("Enter the size of the first array: ");
+    scanf("%d", &n);
+    int arr1[n];
 
-	sort(arr1,size1);
-	printf("Array 1 after sorting:\n");
-	for(int i=0;i<size1;i++)
-	{
-		printf("%d,",arr1[i]);	
-	}
-	printf("\n");
+    printf("Enter the elements of the first array: \n");
+    for (i = 0; i < n; i++) {
+        scanf("%d", &arr1[i]);
+    }
 
-// Array 2
+    // Display unsorted first array
+    printf("First Unsorted Array: \n");
+    for (i = 0; i < n; i++) {
+        printf("%d ", arr1[i]);
+    }
+    printf("\n");
 
-	int arr2[5] = {100,89,56,61,2};
-	int size2 = sizeof(arr2)/sizeof(arr2[0]);
+    // Sort and display the first array
+    sortArray(arr1, n);
+    printf("The first sorted array is: \n");
+    for (i = 0; i < n; i++) {
+        printf("%d ", arr1[i]);
+    }
+    printf("\n");
 
-	printf("Unsored Array 2:\n");
-	for(int i=0;i<size2;i++)
-	{
-		printf("%d,",arr2[i]);	
-	}
-	printf("\n");
+    // Input for the second array
+    printf("Enter the size of the second array: ");
+    scanf("%d", &k);
+    int arr2[k];
 
-	sort(arr2,size2);
-	printf("Array 2 after sorting:\n");
-	for(int i=0;i<size2;i++)
-	{
-		printf("%d,",arr2[i]);	
-	}
-	printf("\n");
+    printf("Enter the elements of the second array: \n");
+    for (i = 0; i < k; i++) {
+        scanf("%d", &arr2[i]);
+    }
 
+    // Display unsorted second array
+    printf("Second Unsorted Array: \n");
+    for (i = 0; i < k; i++) {
+        printf("%d ", arr2[i]);
+    }
+    printf("\n");
 
-//Merge array
-	int total = size1+size2;
+    // Sort and display the second array
+    sortArray(arr2, k);
+    printf("The second sorted array is: \n");
+    for (i = 0; i < k; i++) {
+        printf("%d ", arr2[i]);
+    }
+    printf("\n");
 
-	int* merged = (int*)malloc(total * sizeof(int));
+    // Merge the two arrays
+    int arr3[n + k];
+    mergeArrays(arr1, n, arr2, k, arr3);
 
-	merge(arr1, arr2, size1, size2, merged);
+    // Display the merged unsorted array
+    printf("The merged unsorted array is: \n");
+    for (i = 0; i < n + k; i++) {
+        printf("%d ", arr3[i]);
+    }
+    printf("\n");
 
-	printf("Merged array before sorting:\n");
+    // Sort and display the merged array
+    sortArray(arr3, n + k);
+    printf("The merged sorted array is: \n");
+    for (i = 0; i < n + k; i++) {
+        printf("%d ", arr3[i]);
+    }
+    printf("\n");
 
-	for(int i=0;i<total;i++)
-	{
-		printf("%d,",merged[i]);	
-	}
-	printf("\n");
-
-	sort(merged,total);
-
-	printf("Merged array after sorting:\n");
-
-	for(int i=0;i<total;i++)
-	{
-		printf("%d,",merged[i]);	
-	}
-	printf("\n");
-
-	
-	return 0;
+    return 0;
 }
