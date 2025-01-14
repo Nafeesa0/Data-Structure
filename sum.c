@@ -1,4 +1,4 @@
-#include<stdio.h>
+#include <stdio.h>
 
 int main()
 {
@@ -11,8 +11,8 @@ int main()
 
     for(i = 0; i < n; i++)
     {
-        scanf("%d", &array[c]);
-        sum += array[i];    // same as sum = sum + array[i]
+        scanf("%d", &array[i]); // Use 'i' instead of 'c'
+        sum += array[i];        // same as sum = sum + array[i]
     }
 
     printf("\nSum = %d\n", sum);
