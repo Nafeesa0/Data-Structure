@@ -1,106 +1,97 @@
+#include<stdio.h>
+#include<stdlib.h>
 
-
-
-#include <stdio.h>
-#include <stdlib.h>
-
-struct Node
-{
-	int data;
-	struct Node *link;
+struct node {
+    int data;
+    struct node *link;
 };
-//size = 5;
+
+// Size of stack
+#define MAX_SIZE 5
+
 int position = 0;
-struct Node *header = NULL;
-struct Node *CreateNode(int data)
-{
-	struct Node *newnode;
-	newnode = (struct Node *)malloc(sizeof(struct Node));
-	newnode->data = data;
-	newnode->link = NULL;
-	position++;
-	return (newnode);
-};
+struct node *head = NULL;
 
-void traverse()
-{ 
-	struct Node *ptr = header;
-	if (ptr == NULL)
-		printf("\nEmpty Stack!!\n");
-	else
-	{
-		printf("\n");
-		while (ptr != NULL)
-		{
-			printf("%d\t", ptr->data);
-			ptr = ptr->link;
-		}
-	}
-	printf("\n");
+struct node* createnode(int data) {
+    struct node *newnode;
+    newnode = (struct node*)malloc(sizeof(struct node));
+    newnode->data = data;
+    newnode->link = NULL;
+    position++;
+    return newnode;
 }
 
-void push(int data)
-{
-	if(position == 5)
-	{
-		printf("Stack Overflow!!!");
-		return;
-	}	
-	else
-	{
-	struct Node *newnode;
-	newnode = CreateNode(data);
-	newnode->link = header;
-	header = newnode;
-	printf("\nItem added to Position: %d\n",position);
-	}
+void push(int data) {
+    if (position == MAX_SIZE) {
+        printf("Stack overflow!!!!!!!!\n");
+        return;
+    } else {
+        struct node *newnode = createnode(data);
+        newnode->link = head;
+        head = newnode;
+        printf("Item pushed: %d\n", data);
+    }
 }
 
-void pop()
-{
-	struct Node *ptr = header;
-	if (ptr == NULL)
-	{
-		printf("\nEmpty Stack\n");
-		return;
-	}
-	else
-	{
-		printf("\nPopped item from top\n");
-		header = ptr->link;
-		free(ptr);
-	}
-	position--;
+void pop() {
+    struct node *ptr = head;
+    if (ptr == NULL) {
+        printf("Stack underflow!!!!!!!\n");
+        return;
+    } else {
+        printf("Item popped: %d\n", ptr->data);
+        head = ptr->link;
+        free(ptr);
+        position--;
+    }
 }
 
-int main()
-{
-	int choice, data;
-	while (choice != 4)
-	{
-		printf("\n1.Push\n2.Pop\n3.Traverse\n4.Exit\n");
-		printf("Enter choice : ");
-		scanf("%d", &choice);
-		switch (choice)
-		{
-			case 1:
-				printf("Enter an element :");
-				scanf("%d", &data);
-				push(data);
-				break;
-			case 2:
-				pop();
-				break;
-			case 3:
-				traverse();
-				break;
-			case 4:
-				printf("Exiting");
-				return 0;
-			default:
-				printf("\nInvalid Choice");
-				break;
-		}
-	}
-	return 0;
+void traverse() {
+    struct node *ptr = head;
+    if (ptr == NULL) {
+        printf("Stack is empty!!!!!!!!\n");
+        return;
+    } else {
+        printf("Stack elements: ");
+        while (ptr != NULL) {
+            printf("%d\t", ptr->data);
+            ptr = ptr->link;
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    int data, ch = 0;
+    while (ch != 4) {
+        printf("\nStack operations........\n");
+        printf("\n1. Push\n2. Pop\n3. Traverse\n4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &ch);
+
+        switch (ch) {
+            case 1:
+                printf("Enter the element: ");
+                scanf("%d", &data);
+                push(data);
+                break;
+
+            case 2:
+                pop();
+                break;
+
+            case 3:
+                traverse();
+                break;
+
+            case 4:
+                printf("Exiting.........\n");
+                return 0;
+
+            default:
+                printf("Enter a valid choice\n");
+                break;
+        }
+    }
+    return 0;
 }
